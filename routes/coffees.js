@@ -1,9 +1,9 @@
-import express from "express";
-import {
+const express = require("express");
+const {
   getCoffees,
   createCoffee,
   deleteCoffee,
-} from "../controllers/coffees.js";
+} = require("../controllers/coffees.js");
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.get("/", getCoffees);
 router.post("/", createCoffee);
 router.delete("/:id", deleteCoffee);
 
-export default router;
+module.exports = router;

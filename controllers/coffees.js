@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import Coffee from "../models/coffees.js";
+const mongoose = require("mongoose");
+const Coffee = require("../models/coffees.js");
 
-export const getCoffees = async (req, res) => {
+const getCoffees = async (req, res) => {
   try {
     const coffees = await Coffee.find();
     res.status(200).json(coffees);
@@ -10,7 +10,7 @@ export const getCoffees = async (req, res) => {
   }
 };
 
-export const createCoffee = async (req, res) => {
+const createCoffee = async (req, res) => {
   const coffee = req.body;
   const newCoffee = new Coffee(coffee);
   try {
@@ -21,10 +21,12 @@ export const createCoffee = async (req, res) => {
   }
 };
 
-export const deleteCoffee = async (req, res) => {
+const deleteCoffee = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No coffees with this id");
   await Coffee.findByIdAndRemove(id);
   res.json({ message: "Post deleted successfully" });
 };
+
+module.exports = { getCoffees, createCoffee, deleteCoffee };
