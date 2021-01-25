@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/coffees", require("./routes/coffees.js"));
+app.use("/cafes", require("./routes/cafes.js"));
 
 mongoose
   .connect(CONNECTION_URL, {

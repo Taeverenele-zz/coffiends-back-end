@@ -9,12 +9,12 @@ const CafeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  operating_hours: {
-    type: Array,
-    required: true,
-  },
-  menu: [menuSchema],
-  owner: [userSchema],
+  // operating_hours: {
+  //   type: Array,
+  //   required: true,
+  // },
+  // menu: [menuSchema],
+  // owner: [userSchema],
 });
 
 const Cafe = mongoose.model("Cafe", CafeSchema);
