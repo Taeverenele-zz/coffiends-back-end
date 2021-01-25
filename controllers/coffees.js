@@ -22,8 +22,8 @@ export const createCoffee = async (req, res) => {
 };
 
 export const deleteCoffee = async (req, res) => {
-  const { iid } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(_id))
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No coffees with this id");
   await Coffee.findByIdAndRemove(id);
   res.json({ message: "Post deleted successfully" });
