@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const MenuSchema = new mongoose.Schema({
   coffee: {
-    type: [coffeeSchema],
+    type: {
+      type: mongoose.Types.ObjectId,
+      ref: "Coffee",
+    },
     required: true,
   },
   price: {
