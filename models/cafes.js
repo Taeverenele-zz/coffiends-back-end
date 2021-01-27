@@ -19,19 +19,11 @@ const CafeSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-<<<<<<< HEAD
   menu: {
     type: Array,
     default: [objectId],
   },
   owner: { type: mongoose.Types.ObjectId, ref: "User" },
-=======
-  // menu: {
-  //   type: Array,
-  //   default: [objectId]
-  // },
-  // owner: { type: mongoose.Types.ObjectId, ref: "User" },
->>>>>>> 48f66fa0244a0a83a5b2abe5d33c6d2c84ce86a0
 });
 
 const Cafe = mongoose.model("Cafes", CafeSchema);
