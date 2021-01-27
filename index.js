@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/coffees", require("./routes/coffees.js"));
 app.use("/cafes", require("./routes/cafes.js"));
+app.use("/users", require("./routes/users.js"));
 
 mongoose
   .connect(CONNECTION_URL, {
