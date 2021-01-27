@@ -19,7 +19,10 @@ const CafeSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  // menu: { type: mongoose.Types.ObjectId, ref: "Menu" },
+  // menu: {
+  //   type: Array,
+  //   default: [objectId]
+  // },
   // owner: { type: mongoose.Types.ObjectId, ref: "User" },
 });
 
