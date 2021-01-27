@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const objectId = mongoose.Types.ObjectId
+const objectId = mongoose.Types.ObjectId;
 
 const CafeSchema = new mongoose.Schema({
   name: {
@@ -17,13 +17,10 @@ const CafeSchema = new mongoose.Schema({
   },
   location: {
     type: Array,
-    required: true
+    required: true,
   },
-  menu: {
-    type: Array,
-    default: [objectId]
-  },
-  owner: { type: objectId, ref: "User" },
+  // menu: { type: mongoose.Types.ObjectId, ref: "Menu" },
+  // owner: { type: mongoose.Types.ObjectId, ref: "User" },
 });
 
 const Cafe = mongoose.model("Cafes", CafeSchema);
