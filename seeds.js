@@ -63,7 +63,7 @@ mongoose.connection.once('connected', async () => {
             address: "L1 102 Adelaide St, Brisbane, QLD, 4000",
             operating_hours: [ "0800", "1600" ],
             location: [ -27.468298, 153.0247838 ],
-            owner: sebCafe._id,
+            owner: cafeTestUser._id,
             menu: []
         }
     )
