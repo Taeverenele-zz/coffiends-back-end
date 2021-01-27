@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/", getCafes);
 router.post("/", createCafe);
-router.patch("/:id", updateCafe);
+router.put("/:id", updateCafe);
 router.delete("/:id", deleteCafe);
 
 module.exports = router;

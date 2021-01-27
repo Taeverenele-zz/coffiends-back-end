@@ -22,12 +22,13 @@ const createCafe = async (req, res) => {
 };
 
 const updateCafe = async (req, res) => {
-  const { id: _id } = req.params;
+  const { id } = req.params;
   const cafe = req.body;
-  if (!mongoose.Types.ObjectId.isValid(_id))
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send("No cafe with that id");
-  const updatedCafe = await Cafe.findByIdAndUpdate(_id, cafe, { new: true });
-  res.json(updatedCafe);
+  }
+  const updatedCafe = await Cafe.findByIdAndUpdate(id, cafe, { new: true });
+  res.send(updatedCafe);
 };
 
 const deleteCafe = async (req, res) => {
