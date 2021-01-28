@@ -5,7 +5,7 @@ const Coffee = require("./models/coffees.js");
 const MenuItem = require("./models/menuItems.js");
 
 const CONNECTION_URL =
-  "mongodb+srv://ntaevere:ntaevere123@coffee.nip9p.mongodb.net/coffiends?retryWrites=true&w=majority";
+  "mongodb+srv://ntaevere:ntaevere123@coffee.nip9p.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
@@ -101,32 +101,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe01MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe01._id,
   });
   const cafe01MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe01._id,
   });
   const cafe01MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe01._id,
   });
   const cafe01MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.5,
     cafe: cafe01._id,
   });
   const cafe01MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe01._id,
   });
   const cafe01MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4,
     cafe: cafe01._id,
   });
@@ -159,32 +159,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe02MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe02._id,
   });
   const cafe02MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe02._id,
   });
   const cafe02MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe02._id,
   });
   const cafe02MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.5,
     cafe: cafe02._id,
   });
   const cafe02MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe02._id,
   });
   const cafe02MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4,
     cafe: cafe02._id,
   });
@@ -217,32 +217,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe03MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe03._id,
   });
   const cafe03MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe03._id,
   });
   const cafe03MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe03._id,
   });
   const cafe03MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.5,
     cafe: cafe03._id,
   });
   const cafe03MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe03._id,
   });
   const cafe03MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4,
     cafe: cafe03._id,
   });
@@ -275,32 +275,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe04MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe04._id,
   });
   const cafe04MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe04._id,
   });
   const cafe04MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe04._id,
   });
   const cafe04MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.5,
     cafe: cafe04._id,
   });
   const cafe04MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe04._id,
   });
   const cafe04MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4,
     cafe: cafe04._id,
   });
@@ -333,32 +333,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe05MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe05._id,
   });
   const cafe05MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe05._id,
   });
   const cafe05MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe05._id,
   });
   const cafe05MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.5,
     cafe: cafe05._id,
   });
   const cafe05MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe05._id,
   });
   const cafe05MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4,
     cafe: cafe05._id,
   });
@@ -391,33 +391,28 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe06MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3,
     cafe: cafe06._id,
   });
   const cafe06MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.25,
     cafe: cafe06._id,
   });
   const cafe06MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.75,
     cafe: cafe06._id,
   });
   const cafe06MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 3.95,
     cafe: cafe06._id,
   });
   const cafe06MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.3,
-    cafe: cafe06._id,
-  });
-  const cafe06MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
-    price: 4.45,
     cafe: cafe06._id,
   });
   const menu06 = [
@@ -426,7 +421,6 @@ mongoose.connection.once("connected", async () => {
     cafe06MenuItems3._id,
     cafe06MenuItems4._id,
     cafe06MenuItems5._id,
-    cafe06MenuItems6._id,
   ];
   await Cafe.updateOne(
     { cafe_name: "Anytime Coffee" },
@@ -449,32 +443,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe07MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 5,
     cafe: cafe07._id,
   });
   const cafe07MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 9,
     cafe: cafe07._id,
   });
   const cafe07MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 1.25,
     cafe: cafe07._id,
   });
   const cafe07MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 6.5,
     cafe: cafe07._id,
   });
   const cafe07MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 8.33,
     cafe: cafe07._id,
   });
   const cafe07MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 19.24,
     cafe: cafe07._id,
   });
@@ -507,32 +501,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe08MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4,
     cafe: cafe08._id,
   });
   const cafe08MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 4.5,
     cafe: cafe08._id,
   });
   const cafe08MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 3,
     cafe: cafe08._id,
   });
   const cafe08MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4.25,
     cafe: cafe08._id,
   });
   const cafe08MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.5,
     cafe: cafe08._id,
   });
   const cafe08MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 5.75,
     cafe: cafe08._id,
   });
@@ -565,32 +559,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe09MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4,
     cafe: cafe09._id,
   });
   const cafe09MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 4.5,
     cafe: cafe09._id,
   });
   const cafe09MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 3,
     cafe: cafe09._id,
   });
   const cafe09MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4.25,
     cafe: cafe09._id,
   });
   const cafe09MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.5,
     cafe: cafe09._id,
   });
   const cafe09MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 5.75,
     cafe: cafe09._id,
   });
@@ -623,32 +617,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe10MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4,
     cafe: cafe10._id,
   });
   const cafe10MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 4.5,
     cafe: cafe10._id,
   });
   const cafe10MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 3,
     cafe: cafe10._id,
   });
   const cafe10MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4.25,
     cafe: cafe10._id,
   });
   const cafe10MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.5,
     cafe: cafe10._id,
   });
   const cafe10MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 5.75,
     cafe: cafe10._id,
   });
@@ -681,32 +675,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe11MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4,
     cafe: cafe11._id,
   });
   const cafe11MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 4.5,
     cafe: cafe11._id,
   });
   const cafe11MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 3,
     cafe: cafe11._id,
   });
   const cafe11MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4.25,
     cafe: cafe11._id,
   });
   const cafe11MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.5,
     cafe: cafe11._id,
   });
   const cafe11MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 5.75,
     cafe: cafe11._id,
   });
@@ -739,32 +733,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe12MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4,
     cafe: cafe12._id,
   });
   const cafe12MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 4.5,
     cafe: cafe12._id,
   });
   const cafe12MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 3,
     cafe: cafe12._id,
   });
   const cafe12MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4.25,
     cafe: cafe12._id,
   });
   const cafe12MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3.5,
     cafe: cafe12._id,
   });
   const cafe12MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 5.75,
     cafe: cafe12._id,
   });
@@ -797,32 +791,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe13MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4.75,
     cafe: cafe13._id,
   });
   const cafe13MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 5.5,
     cafe: cafe13._id,
   });
   const cafe13MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 4,
     cafe: cafe13._id,
   });
   const cafe13MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 5.25,
     cafe: cafe13._id,
   });
   const cafe13MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 4.5,
     cafe: cafe13._id,
   });
   const cafe13MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 6.75,
     cafe: cafe13._id,
   });
@@ -855,32 +849,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe14MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4.75,
     cafe: cafe14._id,
   });
   const cafe14MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 5.5,
     cafe: cafe14._id,
   });
   const cafe14MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 4,
     cafe: cafe14._id,
   });
   const cafe14MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 5.25,
     cafe: cafe14._id,
   });
   const cafe14MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 4.5,
     cafe: cafe14._id,
   });
   const cafe14MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 6.75,
     cafe: cafe14._id,
   });
@@ -913,32 +907,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe15MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4.75,
     cafe: cafe15._id,
   });
   const cafe15MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 5.5,
     cafe: cafe15._id,
   });
   const cafe15MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 4,
     cafe: cafe15._id,
   });
   const cafe15MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 5.25,
     cafe: cafe15._id,
   });
   const cafe15MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 4.5,
     cafe: cafe15._id,
   });
   const cafe15MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 6.75,
     cafe: cafe15._id,
   });
@@ -971,32 +965,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe16MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 4.75,
     cafe: cafe16._id,
   });
   const cafe16MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 5.5,
     cafe: cafe16._id,
   });
   const cafe16MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 4,
     cafe: cafe16._id,
   });
   const cafe16MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 5.25,
     cafe: cafe16._id,
   });
   const cafe16MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 4.5,
     cafe: cafe16._id,
   });
   const cafe16MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 6.75,
     cafe: cafe16._id,
   });
@@ -1029,32 +1023,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe17MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.3,
     cafe: cafe17._id,
   });
   const cafe17MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe17._id,
   });
   const cafe17MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2,
     cafe: cafe17._id,
   });
   const cafe17MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4,
     cafe: cafe17._id,
   });
   const cafe17MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 2.75,
     cafe: cafe17._id,
   });
   const cafe17MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4.5,
     cafe: cafe17._id,
   });
@@ -1084,32 +1078,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe18MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe18._id,
   });
   const cafe18MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe18._id,
   });
   const cafe18MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe18._id,
   });
   const cafe18MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4,
     cafe: cafe18._id,
   });
   const cafe18MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe18._id,
   });
   const cafe18MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4.5,
     cafe: cafe18._id,
   });
@@ -1142,32 +1136,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe19MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe19._id,
   });
   const cafe19MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe19._id,
   });
   const cafe19MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe19._id,
   });
   const cafe19MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4,
     cafe: cafe19._id,
   });
   const cafe19MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe19._id,
   });
   const cafe19MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4.5,
     cafe: cafe19._id,
   });
@@ -1200,32 +1194,32 @@ mongoose.connection.once("connected", async () => {
     menu: [],
   });
   const cafe20MenuItems1 = await MenuItem.create({
-    type: flatWhite._id,
+    coffee: flatWhite._id,
     price: 3.5,
     cafe: cafe20._id,
   });
   const cafe20MenuItems2 = await MenuItem.create({
-    type: latte._id,
+    coffee: latte._id,
     price: 3.5,
     cafe: cafe20._id,
   });
   const cafe20MenuItems3 = await MenuItem.create({
-    type: espresso._id,
+    coffee: espresso._id,
     price: 2.5,
     cafe: cafe20._id,
   });
   const cafe20MenuItems4 = await MenuItem.create({
-    type: capuccino._id,
+    coffee: capuccino._id,
     price: 4,
     cafe: cafe20._id,
   });
   const cafe20MenuItems5 = await MenuItem.create({
-    type: longBlack._id,
+    coffee: longBlack._id,
     price: 3,
     cafe: cafe20._id,
   });
   const cafe20MenuItems6 = await MenuItem.create({
-    type: icedCoffee._id,
+    coffee: icedCoffee._id,
     price: 4.5,
     cafe: cafe20._id,
   });

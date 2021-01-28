@@ -15,6 +15,7 @@ app.use(cors());
 app.use("/coffees", require("./routes/coffees.js"));
 app.use("/cafes", require("./routes/cafes.js"));
 app.use("/users", require("./routes/users.js"));
+app.use("/map", require("./routes/map.js"));
 
 mongoose
   .connect(CONNECTION_URL, {
