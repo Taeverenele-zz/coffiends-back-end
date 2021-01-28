@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const objectId = mongoose.Types.ObjectId;
-
 const CafeSchema = new mongoose.Schema({
   cafe_name: {
     type: String,
@@ -19,10 +17,7 @@ const CafeSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  menu: {
-    type: Array,
-    default: [objectId],
-  },
+  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: "MenuItem" }],
   owner: { type: mongoose.Types.ObjectId, ref: "User" },
 });
 

@@ -3,9 +3,9 @@ const Cafe = require("../models/cafes.js");
 const MenuItems = require("../models/menuItems.js");
 
 const selectMapCafes = async (req, res) => {
-    const userGeo = [-27.468298, 153.0247838];
-    const time = "0600"
-    const coffee = "601223b1fdf36556350b602e"
+    const userGeo = req.body.location;
+    const time = req.body.time
+    const coffee = req.body.coffee
     try {
       const cafes = await Cafe.find(
         {
