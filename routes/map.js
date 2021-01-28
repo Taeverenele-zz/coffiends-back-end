@@ -5,6 +5,6 @@ const {
 
 const router = express.Router();
 
-router.get("/", selectMapCafes);
+router.post("/", selectMapCafes);
 
 module.exports = router;
