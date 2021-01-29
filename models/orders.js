@@ -1,19 +1,23 @@
 const mongoose = require("mongoose");
-const Cafe = require("./cafes");
-const Coffee = require("./coffees");
 
 const OrderSchema = new mongoose.Schema({
+  cafe: { type: mongoose.Types.ObjectId, ref: "Cafe" },
+  user: { type: mongoose.Types.ObjectId, ref: "User" },
+  order_date: {
+    type: Date,
+    default: Date.now(),
+  },
+  active: {
+    type: Boolean,
+    default: true
+  },
   coffee: {
-    type: { type: mongoose.Types.ObjectId, ref: "Coffee" },
+    type: String,
     required: true,
   },
-  cafe: {
-    type: { type: mongoose.Types.ObjectId, ref: "Cafe" },
-    required: true,
-  },
-  user: {
-    type: { type: mongoose.Types.ObjectId, ref: "User" },
-    required: true,
+  size: {
+    type: String,
+    required: true
   },
   milk: {
     type: String,
@@ -23,13 +27,15 @@ const OrderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  time: {
-    type: Date,
-    default: Date.now,
+  pickup_time: {
+    type: String,
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true
   },
 });
-
-coffee.name;
 
 const Order = mongoose.model("Order", OrderSchema);
 

@@ -3,6 +3,7 @@ const User = require("./models/users.js");
 const Cafe = require("./models/cafes.js");
 const Coffee = require("./models/coffees.js");
 const MenuItem = require("./models/menuItems.js");
+const Order = require("./models/orders.js");
 
 const CONNECTION_URL =
   "mongodb+srv://ntaevere:ntaevere123@coffee.nip9p.mongodb.net/coffiends?retryWrites=true&w=majority";
@@ -84,6 +85,24 @@ mongoose.connection.once("connected", async () => {
     owner: cafeTestUser._id,
     menu: [],
   });
+  const testCafeMenuItems1 = await MenuItem.create({
+    coffee: flatWhite._id,
+    price: 3.5,
+    cafe: testCafe._id,
+  });
+  const testCafeMenuItems2 = await MenuItem.create({
+    coffee: espresso._id,
+    price: 2.5,
+    cafe: testCafe._id,
+  });
+  const testMenu = [
+    testCafeMenuItems1._id,
+    testCafeMenuItems2._id,
+  ];
+  await Cafe.updateOne(
+    { cafe_name: "Test Cafe" },
+    { $push: { menu: testMenu } }
+  );
 
   const user01 = await User.create({
     user_name: "cafe01",
@@ -1235,6 +1254,28 @@ mongoose.connection.once("connected", async () => {
     { cafe_name: "Coffee Anthology" },
     { $push: { menu: menu20 } }
   );
+
+  await Order.create({
+    cafe: testCafe,
+    user: cafeTestUser,
+    coffee: "Flat White",
+    size: "Large",
+    milk: "Regular Milk",
+    sugar: 2,
+    pickup_time: "10:30",
+    total: 4,
+  })
+  await Order.create({
+    cafe: testCafe,
+    user: cafeTestUser,
+    active: false,
+    coffee: "Espresso",
+    size: "Regular",
+    milk: "No Milk",
+    sugar: 0,
+    pickup_time: "07:30",
+    total: 2.5,
+  })
 
   mongoose.connection.close();
 });
