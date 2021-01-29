@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const passport = require("passport");
 const User = require("../models/users.js");
 
 const getUsers = async (req, res) => {
@@ -48,4 +49,52 @@ const deleteUser = async (req, res) => {
   res.json({ message: "User deleted successfully" });
 };
 
-module.exports = { getUsers, getOneUser, createUser, deleteUser, updateUser };
+const registerUser = async (req, res) => {
+  User.register(new User({
+    username: req.body.username,
+    user_name: req.body.user_name,
+    role: req.body.role,
+    phone: req.body.phone
+  }), req.body.password, function(err, user) {
+    if (err) {
+      res.status(400).send(err);
+    };
+    passport.authenticate("local")(req, res, () => {
+      res.send({ username: user.username });
+    });
+  });
+};
+
+const loginUser = async (req, res) => {
+  console.log("Trying to login");
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      console.log(err)
+      res.status(400).send(err);
+    };
+    if (!user) {
+      res.status(400).send("Email/Password are incorrect");
+    } else {
+      req.logIn(user, (error) => {
+          if (error) throw error;
+          res.send({username: user.username, id: user._id });
+      });
+    };
+  })(req, res);
+};
+
+const logUserOut = (req, res) => {
+  req.logOut();
+  res.send(200);
+};
+
+const userSessionCheck = async (req, res) => {
+  console.log("checking");
+  if (req.user) {
+      res.send({username: req.user.username});
+  } else {
+      res.send({username: null});
+  };
+};
+
+module.exports = { getUsers, getOneUser, createUser, deleteUser, updateUser, registerUser, loginUser, logUserOut, userSessionCheck };
