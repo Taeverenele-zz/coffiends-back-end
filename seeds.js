@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const passport = require("passport");
 const User = require("./models/users.js");
 const Cafe = require("./models/cafes.js");
 const Coffee = require("./models/coffees.js");
@@ -41,42 +42,37 @@ mongoose.connection.once("connected", async () => {
     description: "like a latte but cold with ice n stuff",
   });
 
-  const adminUser = await User.create({
+  const adminUser = await User.register({
+    username: "admin@coffiends.com",
     user_name: "Admin",
-    email: "admin@coffiends.com",
-    password: "password",
     role: "admin",
     phone: "0400000000",
-  });
-  const sebUser = await User.create({
+  }, "password");
+  const sebUser = await User.register({
+    username: "st.b.dev20@gmail.com",
     user_name: "Seb",
-    email: "st.b.dev20@gmail.com",
-    password: "password",
     role: "user",
     phone: "0400111222",
-  });
-  const neleUser = await User.create({
+  }, "password");
+  const neleUser = await User.register({
+    username: "ntaevere@gmail.com",
     user_name: "Nele",
-    email: "ntaevere@gmail.com",
-    password: "password",
     role: "user",
     phone: "0400111222",
-  });
-  const tyeUser = await User.create({
+  }, "password");
+  const tyeUser = await User.register({
+    username: "cab022002@coderacademy.edu.au",
     user_name: "Tye",
-    email: "cab022002@coderacademy.edu.au",
-    password: "password",
     role: "user",
     phone: "0400111222",
-  });
+  }, "password");
 
-  const cafeTestUser = await User.create({
+  const cafeTestUser = await User.register({
+    username: "cab022014@coderacademy.edu.au",
     user_name: "Test",
-    email: "cab022014@coderacademy.edu.au",
-    password: "password",
     role: "cafe",
     phone: "0400111222",
-  });
+  }, "password");
   const testCafe = await Cafe.create({
     cafe_name: "Test Cafe",
     address: "L1 102 Adelaide St, Brisbane, QLD, 4000",
@@ -104,13 +100,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: testMenu } }
   );
 
-  const user01 = await User.create({
+  const user01 = await User.register({
+    username: "cafe01@coffiends.com",
     user_name: "cafe01",
-    email: "cafe01@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe01 = await Cafe.create({
     cafe_name: "Brew Cafe & Wine Bar",
     address: "Lower, Burnett Ln, Brisbane City",
@@ -162,13 +157,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu01 } }
   );
 
-  const user02 = await User.create({
+  const user02 = await User.register({
+    username: "cafe02@coffiends.com",
     user_name: "cafe02",
-    email: "cafe02@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe02 = await Cafe.create({
     cafe_name: "Cleberson’s Coffee . Cafe . Brisbane",
     address: "Shop 3, Stamford plaza hotel, 39 Edward St, Brisbane City",
@@ -220,13 +214,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu02 } }
   );
 
-  const user03 = await User.create({
+  const user03 = await User.register({
+    username: "cafe03@coffiends.com",
     user_name: "cafe03",
-    email: "cafe03@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe03 = await Cafe.create({
     cafe_name: "3 Dragonflies Cafe",
     address: "214 Adelaide St, Brisbane City",
@@ -278,13 +271,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu03 } }
   );
 
-  const user04 = await User.create({
+  const user04 = await User.register({
+    username: "cafe04@coffiends.com",
     user_name: "cafe04",
-    email: "cafe04@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe04 = await Cafe.create({
     cafe_name: "Cafe Mondial",
     address: "167 Albert St, Brisbane City",
@@ -336,13 +328,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu04 } }
   );
 
-  const user05 = await User.create({
+  const user05 = await User.register({
+    username: "cafe05@coffiends.com",
     user_name: "cafe05",
-    email: "cafe05@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe05 = await Cafe.create({
     cafe_name: "Coffee Booth",
     address: "150 Edward St, Brisbane City",
@@ -394,13 +385,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu05 } }
   );
 
-  const user06 = await User.create({
+  const user06 = await User.register({
+    username: "cafe06@coffiends.com",
     user_name: "cafe06",
-    email: "cafe06@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe06 = await Cafe.create({
     cafe_name: "Anytime Coffee",
     address: "160 Mary St, Brisbane City",
@@ -446,13 +436,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu06 } }
   );
 
-  const user07 = await User.create({
+  const user07 = await User.register({
+    username: "cafe07@coffiends.com",
     user_name: "cafe07",
-    email: "cafe07@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe07 = await Cafe.create({
     cafe_name: "Mallee Specialty Coffee",
     address: "Shop 11, Elizabeth Arcade, 97 Elizabeth St, Brisbane City",
@@ -504,13 +493,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu07 } }
   );
 
-  const user08 = await User.create({
+  const user08 = await User.register({
+    username: "cafe08@coffiends.com",
     user_name: "cafe08",
-    email: "cafe08@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe08 = await Cafe.create({
     cafe_name: "Hard Coffee",
     address: "261 Queen St, Brisbane City",
@@ -562,13 +550,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu08 } }
   );
 
-  const user09 = await User.create({
+  const user09 = await User.register({
+    username: "cafe09@coffiends.com",
     user_name: "cafe09",
-    email: "cafe09@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe09 = await Cafe.create({
     cafe_name: "Wicked Corner Cafe",
     address: "2/166 Wickham Terrace, Spring Hill",
@@ -620,13 +607,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu09 } }
   );
 
-  const user10 = await User.create({
+  const user10 = await User.register({
+    username: "cafe10@coffiends.com",
     user_name: "cafe10",
-    email: "cafe10@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe10 = await Cafe.create({
     cafe_name: "Wake Up Coffee Brisbane",
     address: "Brisbane City",
@@ -678,13 +664,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu10 } }
   );
 
-  const user11 = await User.create({
+  const user11 = await User.register({
+    username: "cafe11@coffiends.com",
     user_name: "cafe11",
-    email: "cafe11@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe11 = await Cafe.create({
     cafe_name: "Henry's Coffee Bar",
     address: "157 Ann St, Brisbane City",
@@ -736,13 +721,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu11 } }
   );
 
-  const user12 = await User.create({
+  const user12 = await User.register({
+    username: "cafe12@coffiends.com",
     user_name: "cafe12",
-    email: "cafe12@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe12 = await Cafe.create({
     cafe_name: "Cafe Pronto",
     address: "160 Ann St, Brisbane City",
@@ -794,13 +778,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu12 } }
   );
 
-  const user13 = await User.create({
+  const user13 = await User.register({
+    username: "cafe13@coffiends.com",
     user_name: "cafe13",
-    email: "cafe13@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe13 = await Cafe.create({
     cafe_name: "Raw on Ann",
     address: "333 Ann St, Brisbane City",
@@ -852,13 +835,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu13 } }
   );
 
-  const user14 = await User.create({
+  const user14 = await User.register({
+    username: "cafe14@coffiends.com",
     user_name: "cafe14",
-    email: "cafe14@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe14 = await Cafe.create({
     cafe_name: "Coffee Mill",
     address: "1/225 Wickham Terrace, Spring Hill",
@@ -910,13 +892,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu14 } }
   );
 
-  const user15 = await User.create({
+  const user15 = await User.register({
+    username: "cafe15@coffiends.com",
     user_name: "cafe15",
-    email: "cafe15@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe15 = await Cafe.create({
     cafe_name: "The White Cat Coffee",
     address: "198 Adelaide St, Brisbane City",
@@ -968,13 +949,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu15 } }
   );
 
-  const user16 = await User.create({
+  const user16 = await User.register({
+    username: "cafe16@coffiends.com",
     user_name: "cafe16",
-    email: "cafe16@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe16 = await Cafe.create({
     cafe_name: "The Coffee Club Café - Brisbane Supreme Courts",
     address: "415 George St, Brisbane City",
@@ -1026,13 +1006,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu16 } }
   );
 
-  const user17 = await User.create({
+  const user17 = await User.register({
+    username: "cafe17@coffiends.com",
     user_name: "cafe17",
-    email: "cafe17@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe17 = await Cafe.create({
     cafe_name: "Bean Cafe",
     address: "Laneway Basement, 181 George St, Brisbane City",
@@ -1081,13 +1060,12 @@ mongoose.connection.once("connected", async () => {
   ];
   await Cafe.updateOne({ cafe_name: "Bean Cafe" }, { $push: { menu: menu17 } });
 
-  const user18 = await User.create({
+  const user18 = await User.register({
+    username: "cafe18@coffiends.com",
     user_name: "cafe18",
-    email: "cafe18@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe18 = await Cafe.create({
     cafe_name: "Ricochet Espresso",
     address: "276 Edward St, Brisbane City",
@@ -1139,13 +1117,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu18 } }
   );
 
-  const user19 = await User.create({
+  const user19 = await User.register({
+    username: "cafe19@coffiends.com",
     user_name: "cafe19",
-    email: "cafe19@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe19 = await Cafe.create({
     cafe_name: "Caffeine Kitchen",
     address: "400 Queen St, Brisbane City",
@@ -1197,13 +1174,12 @@ mongoose.connection.once("connected", async () => {
     { $push: { menu: menu19 } }
   );
 
-  const user20 = await User.create({
+  const user20 = await User.register({
+    username: "cafe20@coffiends.com",
     user_name: "cafe20",
-    email: "cafe20@coffiends.com",
-    password: "password",
     role: "cafe",
     phone: "0400000000",
-  });
+  }, "password");
   const cafe20 = await Cafe.create({
     cafe_name: "Coffee Anthology",
     address: "126 Margaret St, Brisbane City",
