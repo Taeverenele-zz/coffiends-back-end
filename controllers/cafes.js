@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Cafe = require("../models/cafes.js");
+const User = require("../models/users.js");
+const Order = require("../models/orders.js");
+const MenuItem = require("../models/menuItems.js");
 
 const getCafes = async (req, res) => {
   try {
@@ -8,6 +11,25 @@ const getCafes = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
+};
+
+const getOneCafe = async (req, res) => {
+  try {
+    const cafe = await Cafe.findById(req.params.id);
+    res.status(200).json(cafe);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+const getOneUserCafe = async (req, res) => {
+  try {
+    console.log(req.params.id)
+    const cafe = await Cafe.find({ "owner": req.params.id });
+    res.status(200).json(cafe);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
 };
 
 const createCafe = async (req, res) => {
@@ -39,4 +61,54 @@ const deleteCafe = async (req, res) => {
   res.json({ message: "Cafe deleted successfully" });
 };
 
-module.exports = { getCafes, createCafe, deleteCafe, updateCafe };
+const getCafeOrders = async (req, res) => {
+  try {
+    const cafeOrders = await Order.find(
+      {
+        "cafe": req.params.id,
+        "active": true
+      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    res.status(200).json(cafeOrders);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+const getCafePastOrders = async (req, res) => {
+  const pastDate = new Date(Date.now() - 604800000);
+  try {
+    const cafeOrders = await Order.find(
+      {
+        "cafe": req.params.id,
+        "active": false,
+        "order_date": { $gte: pastDate }
+      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    res.status(200).json(cafeOrders);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+const getCafeMenuItems = async (req, res) => {
+  try {
+    const menuItems = await MenuItem.find(
+      {
+        "cafe": req.params.id,
+      }).populate("coffee");
+    res.status(200).json(menuItems);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+module.exports = {
+  getCafes,
+  createCafe,
+  getOneCafe,
+  getOneUserCafe,
+  deleteCafe,
+  updateCafe,
+  getCafeOrders,
+  getCafePastOrders,
+  getCafeMenuItems
+};

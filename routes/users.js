@@ -8,7 +8,9 @@ const {
   getOneUser,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
+  getUserOrders,
+  getUserPastOrders
 } = require("../controllers/users.js");
 
 const router = express.Router();
@@ -22,5 +24,7 @@ router.get("/:id", getOneUser);
 router.post("/", createUser);
 router.patch("/:id", updateUser);
 router.delete("/:id", deleteUser);
+router.get("/:id/orders", getUserOrders);
+router.get("/:id/orders/past", getUserPastOrders);
 
 module.exports = router;

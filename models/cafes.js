@@ -18,7 +18,7 @@ const CafeSchema = new mongoose.Schema({
     required: true,
   },
   menu: [{ type: mongoose.Schema.Types.ObjectId, ref: "MenuItem" }],
-  owner: { type: mongoose.Types.ObjectId, ref: "User" },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Cafe = mongoose.model("Cafes", CafeSchema);
