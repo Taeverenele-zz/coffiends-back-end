@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const passport = require("passport");
 const User = require("../models/users.js");
+const Order = require("../models/orders.js");
+const Cafe = require("../models/cafes.js");
 
 const registerUser = async (req, res) => {
   User.register(new User({
@@ -99,6 +101,34 @@ const deleteUser = async (req, res) => {
   res.json({ message: "User deleted successfully" });
 };
 
+const getUserOrders = async (req, res) => {
+  try {
+    const userOrders = await Order.find(
+      {
+        "user": req.params.id,
+        "active": true
+      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    res.status(200).json(userOrders);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+const getUserPastOrders = async (req, res) => {
+  const pastDate = new Date(Date.now() - 604800000);
+  try {
+    const userOrders = await Order.find(
+      {
+        "user": req.params.id,
+        "active": false,
+        "order_date": { $gte: pastDate }
+      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    res.status(200).json(userOrders);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -108,5 +138,7 @@ module.exports = {
   getOneUser,
   createUser,
   deleteUser,
-  updateUser
+  updateUser,
+  getUserOrders,
+  getUserPastOrders
 };
