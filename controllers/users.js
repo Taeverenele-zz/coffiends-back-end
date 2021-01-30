@@ -2,13 +2,63 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const User = require("../models/users.js");
 
+const registerUser = async (req, res) => {
+  User.register(new User({
+    username: req.body.username,
+    user_name: req.body.user_name,
+    role: req.body.role,
+    phone: req.body.phone
+  }), req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    };
+    passport.authenticate("local")(req, res, () => {
+      console.log("Registered successfully")
+      res.send({ id: user._id, username: user.username, role: user.role, name: user.user_name });
+    });
+  });
+};
+
+const loginUser = (req, res, next) => {
+  console.log("Login attempted");
+  passport.authenticate("local",  { successRedirect: "/orders" }, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.send(err);
+    } else if (!user) {
+      res.status(400).send("Email/Password are incorrect");
+    } else {
+      req.logIn(user, (error) => {
+          if (error) throw error;
+          console.log("Logged in successfully")
+          res.send({ id: user._id, username: user.username, role: user.role, name: user.user_name });
+      });
+    };
+  })(req, res, next);
+};
+
+const userSessionCheck = (req, res) => {
+  console.log("Checking if user is logged in...");
+  if (req.user) {
+      res.send({ id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
+  } else {
+      res.send(false);
+  };
+};
+
+const logUserOut = (req, res) => {
+  req.logOut();
+  res.sendStatus(200);
+};
+
 const getUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  }
+  };
 };
 
 const getOneUser = async (req, res) => {
@@ -18,7 +68,7 @@ const getOneUser = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  }
+  };
 };
 
 const createUser = async (req, res) => {
@@ -29,7 +79,7 @@ const createUser = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     res.status(409).json({ message: error.message });
-  }
+  };
 };
 
 const updateUser = async (req, res) => {
@@ -49,52 +99,14 @@ const deleteUser = async (req, res) => {
   res.json({ message: "User deleted successfully" });
 };
 
-const registerUser = async (req, res) => {
-  User.register(new User({
-    username: req.body.username,
-    user_name: req.body.user_name,
-    role: req.body.role,
-    phone: req.body.phone
-  }), req.body.password, function(err, user) {
-    if (err) {
-      res.status(400).send(err);
-    };
-    passport.authenticate("local")(req, res, () => {
-      res.send({ username: user.username });
-    });
-  });
+module.exports = {
+  registerUser,
+  loginUser,
+  userSessionCheck ,
+  logUserOut,
+  getUsers,
+  getOneUser,
+  createUser,
+  deleteUser,
+  updateUser
 };
-
-const loginUser = async (req, res) => {
-  console.log("Trying to login");
-  passport.authenticate("local", (err, user) => {
-    if (err) {
-      console.log(err)
-      res.status(400).send(err);
-    };
-    if (!user) {
-      res.status(400).send("Email/Password are incorrect");
-    } else {
-      req.logIn(user, (error) => {
-          if (error) throw error;
-          res.send({username: user.username, id: user._id });
-      });
-    };
-  })(req, res);
-};
-
-const logUserOut = (req, res) => {
-  req.logOut();
-  res.send(200);
-};
-
-const userSessionCheck = async (req, res) => {
-  console.log("checking");
-  if (req.user) {
-      res.send({username: req.user.username});
-  } else {
-      res.send({username: null});
-  };
-};
-
-module.exports = { getUsers, getOneUser, createUser, deleteUser, updateUser, registerUser, loginUser, logUserOut, userSessionCheck };

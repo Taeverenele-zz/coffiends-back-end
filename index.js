@@ -41,10 +41,11 @@ app.use(cookieParser("secret"));
 
 app.use(express.json());
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(cors());
 app.use("/coffees", require("./routes/coffees.js"));
 app.use("/cafes", require("./routes/cafes.js"));
 app.use("/users", require("./routes/users.js"));
