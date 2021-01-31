@@ -25,7 +25,7 @@ const getOneCafe = async (req, res) => {
 const getOneUserCafe = async (req, res) => {
   try {
     console.log(req.params.id)
-    const cafe = await Cafe.find({ "owner": req.params.id });
+    const cafe = await Cafe.findOne({ "owner": req.params.id });
     res.status(200).json(cafe);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -51,6 +51,18 @@ const updateCafe = async (req, res) => {
   }
   const updatedCafe = await Cafe.findByIdAndUpdate(id, cafe, { new: true });
   res.send(updatedCafe);
+};
+
+const updateCafeMenu = async (req, res) => {
+  try {
+    const cafe = await Cafe.updateOne(
+      { _id: req.params.id },
+      { $push: { menu: req.body.newMenuId } }
+    );
+    res.status(201).json(cafe);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  };
 };
 
 const deleteCafe = async (req, res) => {
@@ -108,6 +120,7 @@ module.exports = {
   getOneUserCafe,
   deleteCafe,
   updateCafe,
+  updateCafeMenu,
   getCafeOrders,
   getCafePastOrders,
   getCafeMenuItems

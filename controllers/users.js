@@ -5,6 +5,7 @@ const Order = require("../models/orders.js");
 const Cafe = require("../models/cafes.js");
 
 const registerUser = async (req, res) => {
+  console.log("Attempting signup...");
   User.register(new User({
     username: req.body.username,
     user_name: req.body.user_name,
@@ -16,25 +17,25 @@ const registerUser = async (req, res) => {
       res.send(err);
     };
     passport.authenticate("local")(req, res, () => {
-      console.log("Registered successfully")
-      res.send({ id: user._id, username: user.username, role: user.role, name: user.user_name });
+      console.log("Signup successful");
+      res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
     });
   });
 };
 
 const loginUser = (req, res, next) => {
-  console.log("Login attempted");
-  passport.authenticate("local",  { successRedirect: "/orders" }, (err, user) => {
+  console.log("Attempting login...");
+  passport.authenticate("local", (err, user) => {
     if (err) {
       console.log(err);
       res.send(err);
     } else if (!user) {
-      res.status(400).send("Email/Password are incorrect");
+      res.sendStatus(400);
     } else {
       req.logIn(user, (error) => {
           if (error) throw error;
-          console.log("Logged in successfully")
-          res.send({ id: user._id, username: user.username, role: user.role, name: user.user_name });
+          console.log("Login successful");
+          res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
       });
     };
   })(req, res, next);

@@ -76,7 +76,7 @@ mongoose.connection.once("connected", async () => {
   const testCafe = await Cafe.create({
     cafe_name: "Test Cafe",
     address: "L1 102 Adelaide St, Brisbane, QLD, 4000",
-    operating_hours: ["0800", "1600"],
+    operating_hours: ["0000", "2359"],
     location: [-27.468298, 153.0247838],
     owner: cafeTestUser._id,
     menu: [],

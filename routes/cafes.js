@@ -6,6 +6,7 @@ const {
   getOneUserCafe,
   deleteCafe,
   updateCafe,
+  updateCafeMenu,
   getCafeOrders,
   getCafePastOrders,
   getCafeMenuItems,
@@ -22,5 +23,6 @@ router.delete("/:id", deleteCafe);
 router.get("/:id/orders", getCafeOrders);
 router.get("/:id/orders/past", getCafePastOrders);
 router.get("/:id/menu", getCafeMenuItems);
+router.put("/:id/menu", updateCafeMenu);
 
 module.exports = router;
