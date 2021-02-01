@@ -9,7 +9,7 @@ const {
   updateCafeMenu,
   getCafeOrders,
   getCafePastOrders,
-  getCafeMenuItems,
+  getCafeMenuItems
 } = require("../controllers/cafes.js");
 
 const router = express.Router();
