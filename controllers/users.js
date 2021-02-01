@@ -18,7 +18,13 @@ const registerUser = async (req, res) => {
     };
     passport.authenticate("local")(req, res, () => {
       console.log("Signup successful");
-      res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+      if (user.role === "cafe") {
+        const getCafe = Cafe.findOne({ "owner": user._id });
+        getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
+      } else {
+        res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+      };
+      // res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
     });
   });
 };
@@ -33,9 +39,14 @@ const loginUser = (req, res, next) => {
       res.sendStatus(400);
     } else {
       req.logIn(user, (error) => {
-          if (error) throw error;
-          console.log("Login successful");
+        if (error) throw error;
+        console.log("Login successful");
+        if (user.role === "cafe") {
+          const getCafe = Cafe.findOne({ "owner": user._id });
+          getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
+        } else {
           res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+        };
       });
     };
   })(req, res, next);
@@ -44,9 +55,14 @@ const loginUser = (req, res, next) => {
 const userSessionCheck = (req, res) => {
   console.log("Checking if user is logged in...");
   if (req.user) {
+    if (req.user.role === "cafe") {
+      const getCafe = Cafe.findOne({ "owner": req.user._id });
+      getCafe.then(resp => res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name, cafe: resp }));
+    } else {
       res.send({ id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
+    };
   } else {
-      res.send(false);
+    res.send(false);
   };
 };
 

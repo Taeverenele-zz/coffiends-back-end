@@ -57,7 +57,7 @@ const updateCafeMenu = async (req, res) => {
   try {
     const cafe = await Cafe.updateOne(
       { _id: req.params.id },
-      { $push: { menu: req.body.newMenuId } }
+      { menu: req.body.menu }
     );
     res.status(201).json(cafe);
   } catch (error) {
