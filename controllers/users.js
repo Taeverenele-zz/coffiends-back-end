@@ -59,7 +59,7 @@ const userSessionCheck = (req, res) => {
       const getCafe = Cafe.findOne({ "owner": req.user._id });
       getCafe.then(resp => res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name, cafe: resp }));
     } else {
-      res.send({ id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
+      res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
     };
   } else {
     res.send(false);

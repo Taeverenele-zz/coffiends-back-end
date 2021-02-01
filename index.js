@@ -11,12 +11,11 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.FRONT_END_URL,
   credentials: true
 }));
 
-const CONNECTION_URL =
-  "mongodb+srv://ntaevere:ntaevere123@coffee.nip9p.mongodb.net/coffiends?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL, {
@@ -29,7 +28,7 @@ mongoose.connect(CONNECTION_URL, {
   .catch((error) => console.log(error.message));
 
 app.use(session({
-  secret: "secret", // should be changed & in .env
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({
@@ -37,7 +36,7 @@ app.use(session({
   })
 }));
 
-app.use(cookieParser("secret"));
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(express.json());
 app.use(passport.initialize());
@@ -52,3 +51,4 @@ app.use("/users", require("./routes/users.js"));
 app.use("/map", require("./routes/map.js"));
 app.use("/orders", require("./routes/orders.js"));
 app.use("/menuItems", require("./routes/menuItems.js"));
+app.use("/checkout", require("./routes/checkout.js"));
