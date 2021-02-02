@@ -48,4 +48,26 @@ const setOrderComplete = async (req, res) => {
   };
 };
 
-module.exports = { getOrders, createOrder, getPastOrders, setOrderComplete };
+const successWriteOrder = async (req, res) => {
+  const queryOrder = {
+    cafe: req.query.cafe,
+    user: req.query.user,
+    coffee: req.query.coffee,
+    size: req.query.size,
+    milk: req.query.milk,
+    sugar: req.query.sugar,
+    pickup_time: req.query.time,
+    total: req.query.total
+  };
+
+  const order = queryOrder;
+  const newOrder = new Order(order);
+  try {
+    await newOrder.save();
+    res.status(201).redirect("http://localhost:3000/orders");
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  };
+};
+
+module.exports = { getOrders, createOrder, getPastOrders, setOrderComplete, successWriteOrder };
