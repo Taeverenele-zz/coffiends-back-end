@@ -20,6 +20,15 @@ const createCoffee = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+const updateCoffee = async (req, res) => {
+  const { id } = req.params;
+  const coffee = req.body;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send("No coffee with that id");
+  }
+  const updatedCoffee = await Coffee.findByIdAndUpdate(id, coffee, { new: true });
+  res.send(updatedCoffee);
+};
 
 const deleteCoffee = async (req, res) => {
   const { id } = req.params;
@@ -29,4 +38,4 @@ const deleteCoffee = async (req, res) => {
   res.json({ message: "Coffee deleted successfully" });
 };
 
-module.exports = { getCoffees, createCoffee, deleteCoffee };
+module.exports = { getCoffees, createCoffee, updateCoffee, deleteCoffee };
