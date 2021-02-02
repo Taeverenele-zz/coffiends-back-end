@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Coffee = require("../models/coffees.js");
+const Cafe = require("../models/cafes.js");
+const MenuItem = require("../models/menuItems.js");
 
 const getCoffees = async (req, res) => {
   try {
@@ -38,4 +40,13 @@ const deleteCoffee = async (req, res) => {
   res.json({ message: "Coffee deleted successfully" });
 };
 
-module.exports = { getCoffees, createCoffee, updateCoffee, deleteCoffee };
+const getAvailCafeCoffees = async (req, res) => {
+  try {
+    const availcoffees = req.body.coffees.filter(coff => !req.body.menu.includes(coff._id))
+    res.status(200).json(availcoffees);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+module.exports = { getCoffees, createCoffee, updateCoffee, deleteCoffee, getAvailCafeCoffees };
