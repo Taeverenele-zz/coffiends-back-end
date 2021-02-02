@@ -2,7 +2,6 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 const checkout = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
-
     payment_method_types: ['card'],
     customer_email: req.body.email,
     line_items: [
@@ -18,40 +17,11 @@ const checkout = async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: "http://localhost:3000/payment/success",
+    success_url: `http://localhost:5000/orders/success/?user=${req.body.user}&cafe=${req.body.cafe}&coffee=${req.body.coffee}&size=${req.body.size}&milk=${req.body.milk}&sugar=${req.body.sugar}&time=${req.body.pickup_time}&total=${req.body.total}`,
     cancel_url: "http://localhost:3000/payment/cancel"
   });
 
   res.json({ id: session.id });
 };
 
-// in CLI type: stripe listen --forward-to http://localhost:5000/checkout/webhook
-const webhook = async (request, response) => {
-  let event;
-
-  try {
-    event = request.body;
-  } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log('PaymentIntent was successful!');
-      break;
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-      console.log('PaymentMethod was attached to a Customer!');
-      break;
-    // ... handle other event types
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
-
-  // Return a 200 response to acknowledge receipt of the event
-  response.json({received: true});
-};
-
-module.exports = { checkout, webhook };
+module.exports = { checkout };
