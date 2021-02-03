@@ -14,13 +14,13 @@ const selectMapCafes = async (req, res) => {
           "operating_hours.0": { $lte: time },
           "operating_hours.1": { $gte: time },
         }
-      ).populate("menu")
+      ).populate({ path: "menu", populate: { path: "coffee" }})
   
       const mapCafes = []
   
       cafes.map(cafe => {
         cafe.menu.map(item => {
-          if (item.coffee == coffee) {
+          if (item.coffee.name == coffee) {
             mapCafes.push(cafe)
           }
         })
