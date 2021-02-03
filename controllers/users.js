@@ -6,27 +6,46 @@ const Cafe = require("../models/cafes.js");
 
 const registerUser = async (req, res) => {
   console.log("Attempting signup...");
-  User.register(new User({
-    username: req.body.username,
-    user_name: req.body.user_name,
-    role: req.body.role,
-    phone: req.body.phone
-  }), req.body.password, function(err, user) {
-    if (err) {
-      console.log(err);
-      res.send(err);
-    };
-    passport.authenticate("local")(req, res, () => {
-      console.log("Signup successful");
-      if (user.role === "cafe") {
-        const getCafe = Cafe.findOne({ "owner": user._id });
-        getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
-      } else {
-        res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
-      };
-      // res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
-    });
-  });
+  User.register(
+    new User({
+      username: req.body.username,
+      user_name: req.body.user_name,
+      role: req.body.role,
+      phone: req.body.phone,
+    }),
+    req.body.password,
+    function (err, user) {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      }
+      passport.authenticate("local")(req, res, () => {
+        console.log("Signup successful");
+        if (user.role === "cafe") {
+          const getCafe = Cafe.findOne({ owner: user._id });
+          getCafe.then((resp) =>
+            res.send({
+              _id: user._id,
+              username: user.username,
+              user_name: user.user_name,
+              role: user.role,
+              phone: user.phone,
+              cafe: resp,
+            })
+          );
+        } else {
+          res.send({
+            _id: user._id,
+            username: user.username,
+            user_name: user.user_name,
+            role: user.role,
+            phone: user.phone,
+          });
+        }
+        // res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+      });
+    }
+  );
 };
 
 const loginUser = (req, res, next) => {
@@ -42,13 +61,28 @@ const loginUser = (req, res, next) => {
         if (error) throw error;
         console.log("Login successful");
         if (user.role === "cafe") {
-          const getCafe = Cafe.findOne({ "owner": user._id });
-          getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
+          const getCafe = Cafe.findOne({ owner: user._id });
+          getCafe.then((resp) =>
+            res.send({
+              _id: user._id,
+              username: user.username,
+              user_name: user.user_name,
+              role: user.role,
+              phone: user.phone,
+              cafe: resp,
+            })
+          );
         } else {
-          res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
-        };
+          res.send({
+            _id: user._id,
+            username: user.username,
+            user_name: user.user_name,
+            role: user.role,
+            phone: user.phone,
+          });
+        }
       });
-    };
+    }
   })(req, res, next);
 };
 
@@ -56,14 +90,29 @@ const userSessionCheck = (req, res) => {
   console.log("Checking if user is logged in...");
   if (req.user) {
     if (req.user.role === "cafe") {
-      const getCafe = Cafe.findOne({ "owner": req.user._id });
-      getCafe.then(resp => res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name, cafe: resp }));
+      const getCafe = Cafe.findOne({ owner: req.user._id });
+      getCafe.then((resp) =>
+        res.send({
+          _id: req.user._id,
+          username: req.user.username,
+          role: req.user.role,
+          user_name: req.user.user_name,
+          phone: req.user.phone,
+          cafe: resp,
+        })
+      );
     } else {
-      res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
-    };
+      res.send({
+        _id: req.user._id,
+        username: req.user.username,
+        role: req.user.role,
+        user_name: req.user.user_name,
+        phone: req.user.phone,
+      });
+    }
   } else {
     res.send(false);
-  };
+  }
 };
 
 const logUserOut = (req, res) => {
@@ -77,7 +126,7 @@ const getUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  };
+  }
 };
 
 const getOneUser = async (req, res) => {
@@ -87,7 +136,7 @@ const getOneUser = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  };
+  }
 };
 
 const createUser = async (req, res) => {
@@ -98,7 +147,7 @@ const createUser = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     res.status(409).json({ message: error.message });
-  };
+  }
 };
 
 const updateUser = async (req, res) => {
@@ -120,36 +169,38 @@ const deleteUser = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
   try {
-    const userOrders = await Order.find(
-      {
-        "user": req.params.id,
-        "active": true
-      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    const userOrders = await Order.find({
+      user: req.params.id,
+      active: true,
+    })
+      .populate({ path: "cafe", model: Cafe })
+      .populate("user");
     res.status(200).json(userOrders);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  };
+  }
 };
 
 const getUserPastOrders = async (req, res) => {
   const pastDate = new Date(Date.now() - 604800000);
   try {
-    const userOrders = await Order.find(
-      {
-        "user": req.params.id,
-        "active": false,
-        "order_date": { $gte: pastDate }
-      }).populate({ path: 'cafe', model: Cafe }).populate("user");
+    const userOrders = await Order.find({
+      user: req.params.id,
+      active: false,
+      order_date: { $gte: pastDate },
+    })
+      .populate({ path: "cafe", model: Cafe })
+      .populate("user");
     res.status(200).json(userOrders);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  };
+  }
 };
 
 module.exports = {
   registerUser,
   loginUser,
-  userSessionCheck ,
+  userSessionCheck,
   logUserOut,
   getUsers,
   getOneUser,
@@ -157,5 +208,5 @@ module.exports = {
   deleteUser,
   updateUser,
   getUserOrders,
-  getUserPastOrders
+  getUserPastOrders,
 };
