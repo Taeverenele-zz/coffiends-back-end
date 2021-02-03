@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Order = require("../models/orders.js");
 const Cafe = require("../models/cafes.js");
 const User = require("../models/users.js");
+const emailer = require("../nodemailer.js");
 
 const getOrders = async (req, res) => {
   try {
@@ -59,11 +60,18 @@ const successWriteOrder = async (req, res) => {
     pickup_time: req.query.time,
     total: req.query.total
   };
+  const user = await User.findById(req.query.user);
+  const cafe = await Cafe.findById(req.query.cafe).populate("owner");
 
   const order = queryOrder;
   const newOrder = new Order(order);
   try {
     await newOrder.save();
+    console.log("Order saved to DB");
+    
+    emailer.sendEmail("user", newOrder, user.username);
+    emailer.sendEmail("cafe", newOrder, cafe.owner.username);
+
     res.status(201).redirect("http://localhost:3000/orders");
   } catch (error) {
     res.status(409).json({ message: error.message });
