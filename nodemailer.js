@@ -5,8 +5,8 @@ const sendEmail = (type, deets, addr) => {
     port: 465,
     host: "smtp.gmail.com",
     auth: {
-        user: 'st.b.dev20@gmail.com',
-        pass: 'yolccuxjddeihqfu',
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD,
     },
     secure: true, // upgrades later with STARTTLS -- change this based on the PORT
   });
