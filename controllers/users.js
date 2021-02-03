@@ -20,9 +20,9 @@ const registerUser = async (req, res) => {
       console.log("Signup successful");
       if (user.role === "cafe") {
         const getCafe = Cafe.findOne({ "owner": user._id });
-        getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
+        getCafe.then(resp => res.send({ _id: user._id, username: user.username, user_name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
       } else {
-        res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+        res.send({ _id: user._id, username: user.username, user_name: user.user_name, role: user.role, phone: user.phone });
       };
       // res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
     });
@@ -43,9 +43,9 @@ const loginUser = (req, res, next) => {
         console.log("Login successful");
         if (user.role === "cafe") {
           const getCafe = Cafe.findOne({ "owner": user._id });
-          getCafe.then(resp => res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
+          getCafe.then(resp => res.send({ _id: user._id, username: user.username, user_name: user.user_name, role: user.role, phone: user.phone, cafe: resp }));
         } else {
-          res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+          res.send({ _id: user._id, username: user.username, user_name: user.user_name, role: user.role, phone: user.phone });
         };
       });
     };
@@ -57,9 +57,9 @@ const userSessionCheck = (req, res) => {
   if (req.user) {
     if (req.user.role === "cafe") {
       const getCafe = Cafe.findOne({ "owner": req.user._id });
-      getCafe.then(resp => res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name, cafe: resp }));
+      getCafe.then(resp => res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, user_name: req.user.user_name, cafe: resp }));
     } else {
-      res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, name: req.user.user_name });
+      res.send({ _id: req.user._id, username: req.user.username, role: req.user.role, user_name: req.user.user_name });
     };
   } else {
     res.send(false);
