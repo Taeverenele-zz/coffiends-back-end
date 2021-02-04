@@ -14,7 +14,7 @@ const bodyParser = require("body-parser");
 
 app.use(
   cors({
-    origin: "https://lit-beach-34157.herokuapp.com",
+    origin: process.env.FRONT_END_URL,
     credentials: true,
   })
 );
