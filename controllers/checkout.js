@@ -17,8 +17,8 @@ const checkout = async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: `${process.env.REACT_APP_BACK_END_URL}/orders/success/?user=${req.body.user}&cafe=${req.body.cafe}&coffee=${req.body.coffee}&size=${req.body.size}&milk=${req.body.milk}&sugar=${req.body.sugar}&time=${req.body.pickup_time}&total=${req.body.total}`,
-    cancel_url: `${process.env.BACK_END_URL}`,
+    success_url: `https://enigmatic-crag-04454.herokuapp.com/orders/success/?user=${req.body.user}&cafe=${req.body.cafe}&coffee=${req.body.coffee}&size=${req.body.size}&milk=${req.body.milk}&sugar=${req.body.sugar}&time=${req.body.pickup_time}&total=${req.body.total}`,
+    cancel_url: `https://enigmatic-crag-04454.herokuapp.com`,
   });
 
   res.json({ id: session.id });

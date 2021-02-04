@@ -75,7 +75,7 @@ const successWriteOrder = async (req, res) => {
     emailer.sendEmail("user", newOrder, user.username);
     emailer.sendEmail("cafe", newOrder, cafe.owner.username);
 
-    res.status(201).redirect(`${process.env.FRONT_END_URL}/orders`);
+    res.status(201).redirect(`https://lit-beach-34157.herokuapp.com/orders`);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
