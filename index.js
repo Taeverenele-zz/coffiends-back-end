@@ -8,35 +8,42 @@ const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo")(session);
 require("./passport.js");
 require("dotenv").config();
-const url = require('url');
-const querystring = require('querystring');
+const url = require("url");
+const querystring = require("querystring");
 const bodyParser = require("body-parser");
 
-app.use(cors({
-  origin: process.env.FRONT_END_URL,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [process.env.FRONT_END_URL, process.env.HEROKU_URL],
+    credentials: true,
+  })
+);
 
 const CONNECTION_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(CONNECTION_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-  useCreateIndex: true,
-})
-  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+mongoose
+  .connect(CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
+  })
+  .then(() =>
+    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+  )
   .catch((error) => console.log(error.message));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: false,
-  store: new MongoStore({
-      mongooseConnection: mongoose.connection
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+    }),
   })
-}));
+);
 
 app.use(cookieParser(process.env.SESSION_SECRET));
 
