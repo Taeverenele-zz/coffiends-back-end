@@ -10,7 +10,8 @@ const {
   deleteUser,
   updateUser,
   getUserOrders,
-  getUserPastOrders
+  getUserPastOrders,
+  changeUserPassword,
 } = require("../controllers/users.js");
 
 const router = express.Router();
@@ -23,6 +24,7 @@ router.get("/", getUsers);
 router.get("/:id", getOneUser);
 router.post("/", createUser);
 router.patch("/:id", updateUser);
+router.patch("/:id/change_password", changeUserPassword);
 router.delete("/:id", deleteUser);
 router.get("/:id/orders", getUserOrders);
 router.get("/:id/orders/past", getUserPastOrders);

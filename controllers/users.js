@@ -52,10 +52,9 @@ const loginUser = (req, res, next) => {
   console.log("Attempting login...");
   passport.authenticate("local", (err, user) => {
     if (err) {
-      console.log(err);
       res.send(err);
     } else if (!user) {
-      res.sendStatus(400);
+      res.sendStatus(200);
     } else {
       req.logIn(user, (error) => {
         if (error) throw error;
@@ -84,6 +83,25 @@ const loginUser = (req, res, next) => {
       });
     }
   })(req, res, next);
+};
+
+const changeUserPassword = (req, res) => {
+  User.findById(req.body.user_id)
+    .then((foundUser) => {
+      foundUser
+        .changePassword(req.body.password, req.body.new_password)
+        .then(() => {
+          res.sendStatus(200);
+          console.log(`password changed to '${req.body.new_password}'`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(409).json({ message: error.message });
+    });
 };
 
 const userSessionCheck = (req, res) => {
@@ -209,4 +227,5 @@ module.exports = {
   updateUser,
   getUserOrders,
   getUserPastOrders,
+  changeUserPassword,
 };
