@@ -14,7 +14,7 @@ const bodyParser = require("body-parser");
 
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.FRONT_END_URL,
     credentials: true,
   })
 );
