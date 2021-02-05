@@ -72,7 +72,7 @@ const successWriteOrder = async (req, res) => {
     emailer.sendEmail("user", newOrder, user.username);
     emailer.sendEmail("cafe", newOrder, cafe.owner.username);
 
-    res.status(201).redirect("http://localhost:3000/orders");
+    res.status(201).redirect(process.env.FRONT_END_URL);
   } catch (error) {
     res.status(409).json({ message: error.message });
   };
