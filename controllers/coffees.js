@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Coffee = require("../models/coffees.js");
 const Cafe = require("../models/cafes.js");
-const MenuItem = require("../models/menuItems.js");
 
 const getCoffees = async (req, res) => {
   try {
@@ -37,16 +36,11 @@ const deleteCoffee = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No coffees with this id");
   await Coffee.findByIdAndRemove(id);
+  await Cafe.updateMany(
+    {},
+    { "$pull": { "menu": { "coffeeId": id } }},
+    { safe: true, multi:true });
   res.json({ message: "Coffee deleted successfully" });
 };
 
-const getAvailCafeCoffees = async (req, res) => {
-  try {
-    const availcoffees = req.body.coffees.filter(coff => !req.body.menu.includes(coff._id))
-    res.status(200).json(availcoffees);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
-module.exports = { getCoffees, createCoffee, updateCoffee, deleteCoffee, getAvailCafeCoffees };
+module.exports = { getCoffees, createCoffee, updateCoffee, deleteCoffee };

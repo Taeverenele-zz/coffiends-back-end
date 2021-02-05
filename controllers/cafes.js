@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Cafe = require("../models/cafes.js");
 const User = require("../models/users.js");
 const Order = require("../models/orders.js");
-const MenuItem = require("../models/menuItems.js");
+const Coffee = require("../models/coffees.js");
 
 const getCafes = async (req, res) => {
   try {
@@ -55,11 +55,28 @@ const updateCafe = async (req, res) => {
 
 const updateCafeMenu = async (req, res) => {
   try {
-    const cafe = await Cafe.updateOne(
-      { _id: req.params.id },
-      { menu: req.body.menu }
-    );
-    res.status(201).json(cafe);
+    const cafe = await Cafe.findById(req.params.id);
+    const currentMenu = cafe.menu;
+    let newMenu = [];
+    if (req.body.type === "remove") {
+     currentMenu.map(item => {
+       if (item.coffeeId != req.body.item.coffeeId) {
+         newMenu.push(item);
+       };
+     });
+    } else if (req.body.type === "add") {
+      const coffee = await Coffee.findById(req.body.item.coffee);
+      const newItem = {
+        coffeeId: coffee._id,
+        coffeeName: coffee.name,
+        coffeePrice: req.body.item.price
+      };
+      newMenu = currentMenu;
+      newMenu.push(newItem);
+    };
+    cafe.menu = newMenu;
+    await Cafe.findByIdAndUpdate(req.params.id, cafe, { new: true });
+    res.sendStatus(201);
   } catch (error) {
     res.status(409).json({ message: error.message });
   };
@@ -103,11 +120,38 @@ const getCafePastOrders = async (req, res) => {
 
 const getCafeMenuItems = async (req, res) => {
   try {
-    const menuItems = await MenuItem.find(
+    const cafe = await Cafe.findById(req.params.id);
+    const menu = cafe.menu
+    const menuCoffeeIds = [];
+    menu.map(item => menuCoffeeIds.push(String(item.coffeeId)));
+    const allCoffees = await Coffee.find();
+    const availcoffees = allCoffees.filter(coffee => !menuCoffeeIds.includes(String(coffee._id)))
+    res.status(200).json({
+      availCoffees: availcoffees,
+      menu: menu
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
+};
+
+const selectMapCafes = async (req, res) => {
+  const userGeo = req.body.location;
+  const time = req.body.time
+  const coffee = req.body.coffee
+  
+  try {
+    const cafes = await Cafe.find(
       {
-        "cafe": req.params.id,
-      }).populate("coffee");
-    res.status(200).json(menuItems);
+        "location.0": { $gte: (userGeo[0] - 0.0025), $lte: (userGeo[0] + 0.0025) },
+        "location.1": { $gte: (userGeo[1] - 0.0025), $lte: (userGeo[1] + 0.0025) },
+        "operating_hours.0": { $lte: time },
+        "operating_hours.1": { $gte: time },
+        "menu.coffeeName": coffee
+      }
+    );
+
+    res.status(200).json(cafes);
   } catch (error) {
     res.status(404).json({ message: error.message });
   };
@@ -123,5 +167,6 @@ module.exports = {
   updateCafeMenu,
   getCafeOrders,
   getCafePastOrders,
-  getCafeMenuItems
+  getCafeMenuItems,
+  selectMapCafes
 };

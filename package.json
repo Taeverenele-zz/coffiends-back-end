@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "seed": "nodemon seeds.js"
+    "start": "nodemon index.js",
+    "seed": "node seeds.js"
   },
   "keywords": [],
   "author": "",
