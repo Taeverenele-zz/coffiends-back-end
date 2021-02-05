@@ -4,6 +4,7 @@ const CafeSchema = new mongoose.Schema({
   cafe_name: {
     type: String,
     required: true,
+    unique: true
   },
   address: {
     type: String,
@@ -17,7 +18,20 @@ const CafeSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  menu: [{ type: mongoose.Schema.Types.ObjectId, ref: "MenuItem" }],
+  menu: [
+    {
+      _id: false,
+      coffeeId: { type: mongoose.Schema.Types.ObjectId, ref: "Coffee" },
+      coffeeName: {
+        type: String,
+        required: true
+      },
+      coffeePrice: {
+        type: Number,
+        required: true
+      }
+    }
+  ],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
