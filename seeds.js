@@ -6,8 +6,7 @@ const Coffee = require("./models/coffees.js");
 const MenuItem = require("./models/menuItems.js");
 const Order = require("./models/orders.js");
 
-const CONNECTION_URL =
-  "mongodb+srv://ntaevere:ntaevere123@coffee.nip9p.mongodb.net/coffiends?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.MONGODB_URL;
 
 mongoose.connect(CONNECTION_URL, {
   useNewUrlParser: true,
