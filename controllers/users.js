@@ -118,7 +118,7 @@ const userSessionCheck = (req, res) => {
           phone: req.user.phone,
           cafe: resp,
         })
-      );
+      ).catch(err => console.log(err))
     } else {
       res.send({
         _id: req.user._id,
