@@ -61,3 +61,5 @@ app.use("/map", require("./routes/map.js"));
 app.use("/orders", require("./routes/orders.js"));
 app.use("/menuItems", require("./routes/menuitems.js"));
 app.use("/checkout", require("./routes/checkout.js"));
+
+app.use(express.static('public'))

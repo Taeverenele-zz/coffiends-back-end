@@ -5,10 +5,9 @@ const Cafe = require("./models/cafes.js");
 const Coffee = require("./models/coffees.js");
 const MenuItem = require("./models/menuItems.js");
 const Order = require("./models/orders.js");
+require("dotenv").config();
 
-const CONNECTION_URL = process.env.MONGODB_URL;
-
-mongoose.connect(CONNECTION_URL, {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
@@ -25,7 +24,7 @@ mongoose.connection.once("connected", async () => {
     description: "single/double shot of coffee",
   });
   const cappuccino = await Coffee.create({
-    name: "cappuccino",
+    name: "Cappuccino",
     description: "frothy milked coffee with a dash of chocolate sprinkles",
   });
   const latte = await Coffee.create({

@@ -105,7 +105,7 @@ const changeUserPassword = (req, res) => {
 };
 
 const userSessionCheck = (req, res) => {
-  console.log("Checking if user is logged in...");
+  console.log("Checking for user session...");
   if (req.user) {
     if (req.user.role === "cafe") {
       const getCafe = Cafe.findOne({ owner: req.user._id });
@@ -118,7 +118,7 @@ const userSessionCheck = (req, res) => {
           phone: req.user.phone,
           cafe: resp,
         })
-      );
+      ).catch(err => console.log(err))
     } else {
       res.send({
         _id: req.user._id,
@@ -134,6 +134,7 @@ const userSessionCheck = (req, res) => {
 };
 
 const logUserOut = (req, res) => {
+  console.log("Logging user out");
   req.logOut();
   res.sendStatus(200);
 };
