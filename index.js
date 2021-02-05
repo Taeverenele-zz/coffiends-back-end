@@ -59,5 +59,5 @@ app.use("/cafes", require("./routes/cafes.js"));
 app.use("/users", require("./routes/users.js"));
 app.use("/map", require("./routes/map.js"));
 app.use("/orders", require("./routes/orders.js"));
-app.use("/menuItems", require("./routes/menuItems.js"));
+app.use("/menuItems", require("./routes/menuitems.js"));
 app.use("/checkout", require("./routes/checkout.js"));
