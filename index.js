@@ -29,9 +29,7 @@ mongoose
     useFindAndModify: true,
     useCreateIndex: true,
   })
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-  )
+  .then(() =>app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
   .catch((error) => console.log(error.message));
 
 app.use(
