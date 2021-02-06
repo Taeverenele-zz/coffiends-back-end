@@ -94,7 +94,7 @@ mongoose.connection.once("connected", async () => {
   );
   await Order.create({
     cafe: testCafe,
-    user: cafeUser,
+    user: testUser,
     coffee: "Flat White",
     size: "Large",
     milk: "Soy Milk",
@@ -104,7 +104,7 @@ mongoose.connection.once("connected", async () => {
   });
   await Order.create({
     cafe: testCafe,
-    user: cafeUser,
+    user: testUser,
     active: false,
     coffee: "Espresso",
     size: "Regular",
