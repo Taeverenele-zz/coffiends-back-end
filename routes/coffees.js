@@ -5,7 +5,6 @@ const {
   updateCoffee,
   deleteCoffee
 } = require("../controllers/coffees.js");
-
 const router = express.Router();
 
 router.get("/", getCoffees);

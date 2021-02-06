@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGODB_URL, {
   useUnifiedTopology: true,
   useFindAndModify: true,
 });
+
 mongoose.connection.once("connected", async () => {
   mongoose.connection.db.dropDatabase();
 

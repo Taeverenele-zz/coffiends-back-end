@@ -16,9 +16,8 @@ const registerUser = async (req, res) => {
     req.body.password,
     function (err, user) {
       if (err) {
-        console.log(err);
         res.send(err);
-      }
+      };
       passport.authenticate("local")(req, res, () => {
         console.log("Signup successful");
         if (user.role === "cafe") {
@@ -41,8 +40,7 @@ const registerUser = async (req, res) => {
             role: user.role,
             phone: user.phone,
           });
-        }
-        // res.send({ _id: user._id, username: user.username, name: user.user_name, role: user.role, phone: user.phone });
+        };
       });
     }
   );
@@ -52,9 +50,9 @@ const loginUser = (req, res, next) => {
   console.log("Attempting login...");
   passport.authenticate("local", (err, user) => {
     if (err) {
-      res.send(err);
+      res.sendStatus(400);
     } else if (!user) {
-      res.sendStatus(200);
+      res.sendStatus(401);
     } else {
       req.logIn(user, (error) => {
         if (error) throw error;
@@ -83,25 +81,6 @@ const loginUser = (req, res, next) => {
       });
     }
   })(req, res, next);
-};
-
-const changeUserPassword = (req, res) => {
-  User.findById(req.body.user_id)
-    .then((foundUser) => {
-      foundUser
-        .changePassword(req.body.password, req.body.new_password)
-        .then(() => {
-          res.sendStatus(200);
-          console.log(`password changed to '${req.body.new_password}'`);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(409).json({ message: error.message });
-    });
 };
 
 const userSessionCheck = (req, res) => {
@@ -139,15 +118,6 @@ const logUserOut = (req, res) => {
   res.sendStatus(200);
 };
 
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
 const getOneUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -158,15 +128,12 @@ const getOneUser = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  const user = req.body;
-  const newUser = new User(user);
-  try {
-    await newUser.save();
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(409).json({ message: error.message });
-  }
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No cafes with this id");
+  await User.findByIdAndRemove(id);
+  res.json({ message: "User deleted successfully" });
 };
 
 const updateUser = async (req, res) => {
@@ -178,12 +145,23 @@ const updateUser = async (req, res) => {
   res.json(updatedUser);
 };
 
-const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No cafes with this id");
-  await User.findByIdAndRemove(id);
-  res.json({ message: "User deleted successfully" });
+const changeUserPassword = (req, res) => {
+  User.findById(req.body.user_id)
+    .then((foundUser) => {
+      foundUser
+        .changePassword(req.body.password, req.body.new_password)
+        .then(() => {
+          res.sendStatus(200);
+          console.log(`password changed to '${req.body.new_password}'`);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(409).json({ message: error.message });
+    });
 };
 
 const getUserOrders = async (req, res) => {
@@ -221,12 +199,10 @@ module.exports = {
   loginUser,
   userSessionCheck,
   logUserOut,
-  getUsers,
   getOneUser,
-  createUser,
   deleteUser,
   updateUser,
-  getUserOrders,
-  getUserPastOrders,
   changeUserPassword,
+  getUserOrders,
+  getUserPastOrders
 };

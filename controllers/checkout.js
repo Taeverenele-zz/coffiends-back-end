@@ -2,7 +2,7 @@ const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 const checkout = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
+    payment_method_types: ["card"],
     customer_email: req.body.email,
     line_items: [
       {
@@ -16,7 +16,7 @@ const checkout = async (req, res) => {
         quantity: 1,
       },
     ],
-    mode: 'payment',
+    mode: "payment",
     success_url: `${process.env.BACK_END_URL}/orders/success/?user=${req.body.user}&cafe=${req.body.cafe}&coffee=${req.body.coffee}&size=${req.body.size}&milk=${req.body.milk}&sugar=${req.body.sugar}&time=${req.body.pickup_time}&total=${req.body.total}`,
     cancel_url: process.env.FRONT_END_URL
   });

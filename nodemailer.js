@@ -8,14 +8,14 @@ const sendEmail = (type, deets, addr) => {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASSWORD,
     },
-    secure: true, // upgrades later with STARTTLS -- change this based on the PORT
+    secure: true,
   });
 
   const mailDataUser = {
     from: 'orders@coffiends.com',
     to: addr,
     subject: "Order Placed!",
-    text: "Order Placed. Pick up sson!",
+    text: "Order Placed. Pick up soon!",
     html: `<b>Thanks for the order!</b><br> Your ${deets.coffee} will be ready at ${deets.pickup_time}<br/>`,
   };
 

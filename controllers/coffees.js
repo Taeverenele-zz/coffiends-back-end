@@ -8,7 +8,7 @@ const getCoffees = async (req, res) => {
     res.status(200).json(coffees);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  }
+  };
 };
 
 const createCoffee = async (req, res) => {
@@ -19,8 +19,9 @@ const createCoffee = async (req, res) => {
     res.status(201).json(newCoffee);
   } catch (error) {
     res.status(409).json({ message: error.message });
-  }
+  };
 };
+
 const updateCoffee = async (req, res) => {
   const { id } = req.params;
   const coffee = req.body;
@@ -39,7 +40,8 @@ const deleteCoffee = async (req, res) => {
   await Cafe.updateMany(
     {},
     { "$pull": { "menu": { "coffeeId": id } }},
-    { safe: true, multi:true });
+    { safe: true, multi:true }
+  );
   res.json({ message: "Coffee deleted successfully" });
 };
 

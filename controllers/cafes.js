@@ -10,25 +10,6 @@ const getCafes = async (req, res) => {
     res.status(200).json(cafes);
   } catch (error) {
     res.status(404).json({ message: error.message });
-  }
-};
-
-const getOneCafe = async (req, res) => {
-  try {
-    const cafe = await Cafe.findById(req.params.id);
-    res.status(200).json(cafe);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  };
-};
-
-const getOneUserCafe = async (req, res) => {
-  try {
-    console.log(req.params.id)
-    const cafe = await Cafe.findOne({ "owner": req.params.id });
-    res.status(200).json(cafe);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
   };
 };
 
@@ -40,7 +21,7 @@ const createCafe = async (req, res) => {
     res.status(201).json(newCafe);
   } catch (error) {
     res.status(409).json({ message: error.message });
-  }
+  };
 };
 
 const updateCafe = async (req, res) => {
@@ -48,9 +29,35 @@ const updateCafe = async (req, res) => {
   const cafe = req.body;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send("No cafe with that id");
-  }
+  };
   const updatedCafe = await Cafe.findByIdAndUpdate(id, cafe, { new: true });
   res.send(updatedCafe);
+};
+
+const deleteCafe = async (req, res) => {
+
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No cafes with this id");
+  await Cafe.findByIdAndRemove(id);
+  res.json({ message: "Cafe deleted successfully" });
+};
+
+const getCafeMenu = async (req, res) => {
+  try {
+    const cafe = await Cafe.findById(req.params.id);
+    const menu = cafe.menu;
+    const menuCoffeeIds = [];
+    menu.map(item => menuCoffeeIds.push(String(item.coffeeId)));
+    const allCoffees = await Coffee.find();
+    const availcoffees = allCoffees.filter(coffee => !menuCoffeeIds.includes(String(coffee._id)));
+    res.status(200).json({
+      availCoffees: availcoffees,
+      menu: menu
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  };
 };
 
 const updateCafeMenu = async (req, res) => {
@@ -82,14 +89,6 @@ const updateCafeMenu = async (req, res) => {
   };
 };
 
-const deleteCafe = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No cafes with this id");
-  await Cafe.findByIdAndRemove(id);
-  res.json({ message: "Cafe deleted successfully" });
-};
-
 const getCafeOrders = async (req, res) => {
   try {
     const cafeOrders = await Order.find(
@@ -118,18 +117,10 @@ const getCafePastOrders = async (req, res) => {
   };
 };
 
-const getCafeMenuItems = async (req, res) => {
+const getOneUserCafe = async (req, res) => {
   try {
-    const cafe = await Cafe.findById(req.params.id);
-    const menu = cafe.menu
-    const menuCoffeeIds = [];
-    menu.map(item => menuCoffeeIds.push(String(item.coffeeId)));
-    const allCoffees = await Coffee.find();
-    const availcoffees = allCoffees.filter(coffee => !menuCoffeeIds.includes(String(coffee._id)))
-    res.status(200).json({
-      availCoffees: availcoffees,
-      menu: menu
-    });
+    const cafe = await Cafe.findOne({ "owner": req.params.id });
+    res.status(200).json(cafe);
   } catch (error) {
     res.status(404).json({ message: error.message });
   };
@@ -137,8 +128,8 @@ const getCafeMenuItems = async (req, res) => {
 
 const selectMapCafes = async (req, res) => {
   const userGeo = req.body.location;
-  const time = req.body.time
-  const coffee = req.body.coffee
+  const time = req.body.time;
+  const coffee = req.body.coffee;
   
   try {
     const cafes = await Cafe.find(
@@ -160,13 +151,12 @@ const selectMapCafes = async (req, res) => {
 module.exports = {
   getCafes,
   createCafe,
-  getOneCafe,
-  getOneUserCafe,
-  deleteCafe,
   updateCafe,
+  deleteCafe,
+  getCafeMenu,
   updateCafeMenu,
   getCafeOrders,
   getCafePastOrders,
-  getCafeMenuItems,
+  getOneUserCafe,
   selectMapCafes
 };

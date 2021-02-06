@@ -4,14 +4,12 @@ const {
   loginUser,
   userSessionCheck,
   logUserOut,
-  getUsers,
   getOneUser,
-  createUser,
   deleteUser,
   updateUser,
+  changeUserPassword,
   getUserOrders,
   getUserPastOrders,
-  changeUserPassword,
 } = require("../controllers/users.js");
 
 const router = express.Router();
@@ -20,12 +18,10 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/check", userSessionCheck);
 router.get("/logout", logUserOut);
-router.get("/", getUsers);
 router.get("/:id", getOneUser);
-router.post("/", createUser);
+router.delete("/:id", deleteUser);
 router.patch("/:id", updateUser);
 router.patch("/:id/change_password", changeUserPassword);
-router.delete("/:id", deleteUser);
 router.get("/:id/orders", getUserOrders);
 router.get("/:id/orders/past", getUserPastOrders);
 
