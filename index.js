@@ -19,7 +19,19 @@ app.use(
   })
 );
 
-const CONNECTION_URL = process.env.MONGODB_URL;
+// const CONNECTION_URL = process.env.MONGODB_URL;
+// const PORT = process.env.PORT || 5000;
+
+let CONNECTION_URL;
+
+const env = process.env.NODE_ENV || 'development';
+
+if(env === 'test'){
+  CONNECTION_URL = process.env.MONGODB_URL_TEST
+} else {
+  CONNECTION_URL = process.env.MONGODB_URL
+}
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
@@ -59,3 +71,5 @@ app.use("/orders", require("./routes/orders.js"));
 app.use("/checkout", require("./routes/checkout.js"));
 
 app.use(express.static('public'))
+
+module.exports = app;
