@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const { app } = require('./index');
+const { app } = require('./../index');
 const should = chai.should();
-const Coffee = require('./models/coffees')
+const Coffee = require('../models/coffees')
 
 chai.use(chaiHttp);
 
