@@ -134,8 +134,8 @@ const selectMapCafes = async (req, res) => {
   try {
     const cafes = await Cafe.find(
       {
-        "location.0": { $gte: (userGeo[0] - 0.0025), $lte: (userGeo[0] + 0.0025) },
-        "location.1": { $gte: (userGeo[1] - 0.0025), $lte: (userGeo[1] + 0.0025) },
+        "location.0": { $gte: (userGeo[0] - 0.0050), $lte: (userGeo[0] + 0.0025) },
+        "location.1": { $gte: (userGeo[1] - 0.0050), $lte: (userGeo[1] + 0.0025) },
         "operating_hours.0": { $lte: time },
         "operating_hours.1": { $gte: time },
         "menu.coffeeName": coffee

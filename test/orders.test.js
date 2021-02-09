@@ -22,7 +22,8 @@ describe('Orders', function() {
   });
 
   it('should add a SINGLE Order on /orders/success GET using query params', function(done) {
-    chai.request(app).post('/users/register')
+    chai.request(app)
+    .post('/users/register')
     .send({
       "username": "user@coffiends.com",
       "user_name": "Test User",
@@ -31,7 +32,8 @@ describe('Orders', function() {
       "password": "password"
     })
     .end((err, userResponse) => {
-      chai.request(app).post('/cafes')
+      chai.request(app)
+        .post('/cafes')
         .send({
           "cafe_name": "Cafe Post Test",
           "address": "123 Test St",
