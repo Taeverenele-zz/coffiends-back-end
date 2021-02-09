@@ -155,7 +155,8 @@ const changeUserPassword = (req, res) => {
           console.log(`password changed to '${req.body.new_password}'`);
         })
         .catch((error) => {
-          console.log(error.message);
+          console.log(error)
+          res.json(error.message);
         });
     })
     .catch((error) => {
