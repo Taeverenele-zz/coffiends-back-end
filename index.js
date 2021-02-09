@@ -22,7 +22,7 @@ app.use(
 let CONNECTION_URL;
 
 const env = process.env.NODE_ENV || 'development';
-
+console.log(env)
 if(env === 'test'){
   CONNECTION_URL = process.env.MONGODB_URL_TEST
 } else {
