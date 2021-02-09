@@ -21,7 +21,7 @@ describe('Cafes', function() {
     await Coffee.deleteMany({});
   });
 
-  it('should add a SINGLE cafe on /cafes POST', function(done) {
+  it('should add a SINGLE cafe on /cafes POST', (done) => {
     chai.request(app).post('/users/register')
       .send({
         "username": "cafe@coffiends.com",

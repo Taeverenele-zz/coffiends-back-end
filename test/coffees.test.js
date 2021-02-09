@@ -18,17 +18,6 @@ describe('Coffees', () => {
     await Coffee.deleteMany({});
   })
 
-  // it("should connect and disconnect to mongodb")
-
-  it('should list ALL coffees on /coffees GET', (done) => {
-    chai.request(app)
-      .get('/coffees')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('array');
-        done();
-      });
-  });
   it('should add a SINGLE coffee on /coffees POST', (done) => {
     chai.request(app)
       .post('/coffees')
@@ -44,6 +33,17 @@ describe('Coffees', () => {
         done();
       });
   });
+
+  it('should list ALL coffees on /coffees GET', (done) => {
+    chai.request(app)
+      .get('/coffees')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        done();
+      });
+  });
+
   it('should update a SINGLE coffee on /coffees/<id> PUT', (done) => {
     chai.request(app)
       .get('/coffees')
@@ -62,6 +62,7 @@ describe('Coffees', () => {
         });
       });
   });
+  
   it('should delete a SINGLE coffee on /coffees/<id> DELETE', (done) => {
     chai.request(app)
       .get('/coffees')

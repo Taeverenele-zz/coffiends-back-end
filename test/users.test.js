@@ -15,7 +15,7 @@ describe('Users', function() {
     await User.deleteMany({});
   });
 
-  it('should add a SINGLE user on /users/register POST', function(done) {
+  it('should add a SINGLE user on /users/register POST', (done) => {
     chai.request(app).post('/users/register')
       .send({
         "username": "user@test.com",
