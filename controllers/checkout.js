@@ -18,7 +18,7 @@ const checkout = async (req, res) => {
     ],
     mode: "payment",
     success_url: `${process.env.BACK_END_URL}/orders/success/?user=${req.body.user}&cafe=${req.body.cafe}&coffee=${req.body.coffee}&size=${req.body.size}&milk=${req.body.milk}&sugar=${req.body.sugar}&time=${req.body.pickup_time}&total=${req.body.total}`,
-    cancel_url: process.env.FRONT_END_URL
+    cancel_url: `${process.env.FRONT_END_URL}/home`
   });
 
   res.json({ id: session.id });
